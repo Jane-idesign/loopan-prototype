@@ -683,7 +683,7 @@
         <div class="q-item"><div class="q-icon" style="background:#e8eaf6;">🌙</div><span class="q-label">夜間安全</span></div>
         <div class="q-item"><div class="q-icon" style="background:#e0f7fa;">🏝️</div><span class="q-label">週末旅遊</span></div>
         <div class="q-item" onclick="goTo('explore','home')"><div class="q-icon" style="background:#fce4ec;">📍</div><span class="q-label">景點探索</span></div>
-        <div class="q-item" onclick="goTo('ai','home')"><div class="q-icon" style="background:#f3e5f5;">🤖</div><span class="q-label">AI 助手</span></div>
+        <div class="q-item" onclick="goTo('ai-game','home')"><div class="q-icon" style="background:#f3e5f5;">🎮</div><span class="q-label">AI Game</span></div>
       </div>
 
       <div class="section-header"><h3>猜你會需要</h3></div>
@@ -720,9 +720,9 @@
     </div>
 
     <!-- AI FAB -->
-    <div class="ai-fab" onclick="goTo('ai','home')">
-      <span style="font-size:22px;">🤖</span>
-      <span>AI搭車<br>助班</span>
+    <div class="ai-fab" onclick="goTo('ai-game','home')">
+      <span style="font-size:22px;">🎮</span>
+      <span>AI<br>Game</span>
     </div>
 
     <div class="bottom-nav">
@@ -735,8 +735,8 @@
       <div class="nav-item" onclick="goTo('explore','home')">
         <span class="nav-icon">🔍</span><span class="nav-label">探索</span>
       </div>
-      <div class="nav-item" onclick="goTo('itinerary','home')">
-        <span class="nav-icon">📅</span><span class="nav-label">行程</span>
+      <div class="nav-item" onclick="goTo('ai','home')">
+        <span class="nav-icon">🤖</span><span class="nav-label">AI助手</span>
       </div>
       <div class="nav-item" onclick="goTo('profile','home')">
         <span class="nav-icon">👤</span><span class="nav-label">我的</span>
@@ -871,7 +871,7 @@
       <div class="nav-item" onclick="goBack()"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','route')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','route')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('ai','route')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item" onclick="goTo('profile','route')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /route -->
@@ -980,7 +980,7 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','detail')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','detail')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('ai','detail')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item" onclick="goTo('profile','detail')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /detail -->
@@ -1059,7 +1059,7 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item" onclick="goTo('route','explore')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item on"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','explore')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('ai','explore')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item" onclick="goTo('profile','explore')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /explore -->
@@ -1141,8 +1141,8 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item" onclick="goTo('route','itinerary')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','itinerary')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item on"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
-      <div class="nav-item" onclick="goTo('profile','itinerary')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+      <div class="nav-item" onclick="goTo('ai','itinerary')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
+      <div class="nav-item on" onclick="goTo('profile','itinerary')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /itinerary -->
 
@@ -1209,7 +1209,7 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item" onclick="goTo('route','ai')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','ai')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','ai')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item on"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item" onclick="goTo('profile','ai')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /ai -->
@@ -1247,6 +1247,13 @@
       <div class="pref-sec" style="padding-top:16px; padding-bottom:16px;">
         <div class="pref-sec-label">更多服務</div>
         <div class="pref-list">
+          <div class="pref-row" onclick="goTo('cal-landing','profile')" style="cursor:pointer;">
+            <span class="pref-key">📅 行程 &amp; 行事曆</span>
+            <span class="pref-val" style="display:flex;align-items:center;gap:6px;">
+              <span style="background:#fff3e0;color:#e65100;border-radius:8px;padding:2px 7px;font-size:10px;font-weight:800;">尚未連結</span>
+              <span class="arr">›</span>
+            </span>
+          </div>
           <div class="pref-row"><span class="pref-key">🎫 票務 / 訂票紀錄</span><span class="arr">›</span></div>
           <div class="pref-row"><span class="pref-key">🗂️ 收藏清單</span><span class="arr">›</span></div>
           <div class="pref-row"><span class="pref-key">💬 客服中心</span><span class="arr">›</span></div>
@@ -1259,7 +1266,7 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item" onclick="goTo('route','profile')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','profile')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','profile')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('ai','profile')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item on"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /profile -->
@@ -1384,10 +1391,435 @@
       <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
       <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
       <div class="nav-item" onclick="goTo('explore','detail-rain')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
-      <div class="nav-item" onclick="goTo('itinerary','detail-rain')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('ai','detail-rain')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
       <div class="nav-item" onclick="goTo('profile','detail-rain')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
     </div>
   </div><!-- /detail-rain -->
+
+
+  <!-- ═══════════ AI GAME ═══════════ -->
+  <div class="screen" id="ai-game">
+    <div class="status-bar" style="background:linear-gradient(135deg,#4a148c,#7b1fa2); color:#fff;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div style="background:linear-gradient(160deg,#4a148c 0%,#7b1fa2 45%,#e91e63 100%); padding:14px 16px 20px; flex-shrink:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="back-btn" onclick="goBack()" style="color:rgba(255,255,255,.8);font-size:20px;padding:0;">‹</div>
+          <span style="color:#fff;font-size:18px;font-weight:900;">路伴 AI Game</span>
+        </div>
+        <div style="background:rgba(255,255,255,.18);border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:14px;">⚡</span>
+          <span style="color:#fff;font-size:12px;font-weight:800;">Lv.12 · 連續 5 天</span>
+        </div>
+      </div>
+      <!-- XP bar -->
+      <div style="background:rgba(255,255,255,.15);border-radius:10px;height:8px;margin-bottom:5px;overflow:hidden;">
+        <div style="background:linear-gradient(90deg,#ffd54f,#ffca28);width:68%;height:100%;border-radius:10px;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="color:rgba(255,255,255,.7);font-size:11px;">2,450 / 3,600 XP</span>
+        <span style="color:#ffd54f;font-size:11px;font-weight:800;">Lv.13 升級中</span>
+      </div>
+    </div>
+
+    <div class="screen-body" style="background:#faf5ff;padding-bottom:90px;">
+
+      <!-- today challenge -->
+      <div style="margin:14px 16px 0;">
+        <div style="background:linear-gradient(135deg,#fff9c4,#fff3e0);border-radius:16px;padding:14px;border:1.5px solid #ffd54f;position:relative;overflow:hidden;">
+          <div style="position:absolute;right:-10px;top:-10px;font-size:50px;opacity:.12;">🏆</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="background:#ff6f00;color:#fff;border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800;">今日挑戰</span>
+            <span style="font-size:11px;color:#888;">⏰ 還剩 4 小時</span>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#1a1a2e;margin-bottom:4px;">🚇 捷運路線達人 — 5 題</div>
+          <div style="font-size:12px;color:#555;margin-bottom:10px;">答完可得 <strong style="color:#e65100;">+150 XP</strong> 及限定徽章</div>
+          <div style="background:#fff;border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;">
+            <div style="flex:1;background:#f3e5f5;border-radius:6px;height:6px;overflow:hidden;">
+              <div style="background:var(--p);width:40%;height:100%;border-radius:6px;"></div>
+            </div>
+            <span style="font-size:11px;color:var(--p);font-weight:800;">2 / 5 完成</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- active question -->
+      <div style="margin:14px 16px 0;">
+        <div style="font-size:12px;font-weight:800;color:#888;margin-bottom:8px;">🎯 第 3 題</div>
+        <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(123,94,167,.1);">
+          <div style="font-size:15px;font-weight:800;color:#1a1a2e;line-height:1.45;margin-bottom:14px;">
+            捷運板南線，哪一站最靠近<br>台北 101 / 世貿中心？
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;" id="quiz-options">
+            <div class="quiz-opt" onclick="selectAnswer(this,false)" style="background:#f8f7fc;border:2px solid #e8e0f5;border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .18s;">
+              <span style="width:26px;height:26px;border-radius:50%;background:#e8e0f5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--p);flex-shrink:0;">A</span>
+              <span style="font-size:14px;color:#333;">市政府站</span>
+            </div>
+            <div class="quiz-opt" onclick="selectAnswer(this,true)" style="background:#f8f7fc;border:2px solid #e8e0f5;border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .18s;">
+              <span style="width:26px;height:26px;border-radius:50%;background:#e8e0f5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--p);flex-shrink:0;">B</span>
+              <span style="font-size:14px;color:#333;">台北101 / 世貿站</span>
+            </div>
+            <div class="quiz-opt" onclick="selectAnswer(this,false)" style="background:#f8f7fc;border:2px solid #e8e0f5;border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .18s;">
+              <span style="width:26px;height:26px;border-radius:50%;background:#e8e0f5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--p);flex-shrink:0;">C</span>
+              <span style="font-size:14px;color:#333;">大安站</span>
+            </div>
+            <div class="quiz-opt" onclick="selectAnswer(this,false)" style="background:#f8f7fc;border:2px solid #e8e0f5;border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .18s;">
+              <span style="width:26px;height:26px;border-radius:50%;background:#e8e0f5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--p);flex-shrink:0;">D</span>
+              <span style="font-size:14px;color:#333;">忠孝復興站</span>
+            </div>
+          </div>
+          <div id="quiz-feedback" style="display:none;margin-top:12px;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;"></div>
+        </div>
+      </div>
+
+      <!-- mini games -->
+      <div style="padding:16px 16px 0;">
+        <div style="font-size:14px;font-weight:800;color:#1a1a2e;margin-bottom:10px;">⚡ 快速挑戰</div>
+        <div style="display:flex;gap:10px;">
+          <div style="flex:1;background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;text-align:center;">
+            <div style="font-size:30px;margin-bottom:6px;">📸</div>
+            <div style="font-size:12px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">景點照片<br>猜地點</div>
+            <div style="font-size:10px;color:#aaa;">+80 XP</div>
+          </div>
+          <div style="flex:1;background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;text-align:center;">
+            <div style="font-size:30px;margin-bottom:6px;">🗺️</div>
+            <div style="font-size:12px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">公車路線<br>測驗</div>
+            <div style="font-size:10px;color:#aaa;">+60 XP</div>
+          </div>
+          <div style="flex:1;background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;text-align:center;">
+            <div style="font-size:30px;margin-bottom:6px;">🎲</div>
+            <div style="font-size:12px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">隨機<br>挑戰</div>
+            <div style="font-size:10px;color:#aaa;">+100 XP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- leaderboard -->
+      <div style="padding:14px 16px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#1a1a2e;margin-bottom:10px;">🏆 本週排行</div>
+        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #f5f0fc;">
+            <span style="font-size:16px;font-weight:900;color:#ffa000;width:24px;text-align:center;">1</span>
+            <span style="font-size:20px;">🐾</span>
+            <span style="flex:1;font-size:13px;font-weight:700;color:#333;">路伴達人_小明</span>
+            <span style="font-size:13px;font-weight:800;color:#7b1fa2;">3,200 XP</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #f5f0fc;background:#faf5ff;">
+            <span style="font-size:16px;font-weight:900;color:#78909c;width:24px;text-align:center;">2</span>
+            <span style="font-size:20px;">👤</span>
+            <span style="flex:1;font-size:13px;font-weight:700;color:#7b5ea7;">小路伴（你）</span>
+            <span style="font-size:13px;font-weight:800;color:#7b1fa2;">2,450 XP</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;">
+            <span style="font-size:16px;font-weight:900;color:#a1887f;width:24px;text-align:center;">3</span>
+            <span style="font-size:20px;">🦊</span>
+            <span style="flex:1;font-size:13px;font-weight:700;color:#333;">台北通勤王</span>
+            <span style="font-size:13px;font-weight:800;color:#7b1fa2;">2,100 XP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','ai-game')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','ai-game')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('ai','ai-game')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
+      <div class="nav-item" onclick="goTo('profile','ai-game')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /ai-game -->
+
+
+  <!-- ═══════════ CAL LANDING ═══════════ -->
+  <div class="screen" id="cal-landing">
+    <div class="status-bar" style="background:#fff;color:#1a1a2e;">
+      <span class="time">9:41</span><div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+    <div style="background:#fff;padding:6px 16px 14px;border-bottom:1px solid #f0eaf8;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="back-btn" onclick="goBack()" style="font-size:20px;">‹</div>
+        <span style="font-size:20px;font-weight:900;color:#1a1a2e;">行程</span>
+      </div>
+      <span style="font-size:22px;cursor:pointer;">⚙️</span>
+    </div>
+
+    <div class="screen-body" style="background:#f8f7fc;">
+      <!-- empty state -->
+      <div style="display:flex;flex-direction:column;align-items:center;padding:40px 24px 24px;text-align:center;">
+        <div style="width:90px;height:90px;background:var(--pb);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:18px;">📅</div>
+        <div style="font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:8px;">尚未連結行事曆</div>
+        <div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:24px;">連結後，路伴可以自動讀取<br>你的行程，提前規劃最佳路線</div>
+        <button onclick="goTo('cal-choose','cal-landing')" style="background:var(--p);color:#fff;border:none;border-radius:16px;padding:14px 32px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(123,94,167,.35);width:100%;">
+          🔗 連結我的行事曆
+        </button>
+      </div>
+
+      <!-- features preview -->
+      <div style="padding:0 16px;">
+        <div style="font-size:13px;font-weight:800;color:#888;margin-bottom:10px;">連結後可以做到</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:#fff;border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+            <span style="font-size:24px;width:36px;text-align:center;">🚀</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">自動出發提醒</div><div style="font-size:11px;color:#aaa;">根據行程自動計算出發時間</div></div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+            <span style="font-size:24px;width:36px;text-align:center;">🗺️</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">一鍵導航到會議地點</div><div style="font-size:11px;color:#aaa;">直接讀取地址，免手動輸入</div></div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+            <span style="font-size:24px;width:36px;text-align:center;">⛈️</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;margin-bottom:2px;">天氣 × 行程整合</div><div style="font-size:11px;color:#aaa;">下雨前自動建議雨天路線</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','cal-landing')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','cal-landing')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('ai','cal-landing')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
+      <div class="nav-item on"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /cal-landing -->
+
+
+  <!-- ═══════════ CAL CHOOSE ═══════════ -->
+  <div class="screen" id="cal-choose">
+    <div class="status-bar" style="background:#fff;color:#1a1a2e;">
+      <span class="time">9:41</span><div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+    <div style="background:#fff;padding:6px 16px 14px;border-bottom:1px solid #f0eaf8;">
+      <div class="back-btn" onclick="goBack()" style="font-size:20px;margin-bottom:8px;">‹ 返回</div>
+      <div style="font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">選擇行事曆</div>
+      <div style="font-size:13px;color:#888;">選擇後將請求讀取權限</div>
+    </div>
+
+    <div class="screen-body" style="background:#f8f7fc;padding-bottom:90px;">
+      <div style="padding:16px;">
+        <!-- Google -->
+        <div onclick="selectCalProvider('google')" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent;transition:border-color .15s;" class="cal-provider-row">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#4285f4,#34a853);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">📆</div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:800;color:#1a1a2e;">Google 日曆</div>
+            <div style="font-size:12px;color:#888;margin-top:2px;">Gmail 帳號登入</div>
+          </div>
+          <span style="color:#ccc;font-size:18px;">›</span>
+        </div>
+        <!-- Apple -->
+        <div onclick="selectCalProvider('apple')" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent;transition:border-color .15s;" class="cal-provider-row">
+          <div style="width:48px;height:48px;border-radius:14px;background:#1c1c2e;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🍎</div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:800;color:#1a1a2e;">Apple 行事曆</div>
+            <div style="font-size:12px;color:#888;margin-top:2px;">iCloud 帳號登入</div>
+          </div>
+          <span style="color:#ccc;font-size:18px;">›</span>
+        </div>
+        <!-- Yahoo -->
+        <div onclick="selectCalProvider('yahoo')" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent;transition:border-color .15s;" class="cal-provider-row">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#6001d2,#7b1fa2);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;flex-shrink:0;">Y!</div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:800;color:#1a1a2e;">Yahoo! 行事曆</div>
+            <div style="font-size:12px;color:#888;margin-top:2px;">Yahoo 帳號登入</div>
+          </div>
+          <span style="color:#ccc;font-size:18px;">›</span>
+        </div>
+        <!-- Outlook -->
+        <div onclick="selectCalProvider('outlook')" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent;transition:border-color .15s;" class="cal-provider-row">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#0078d4,#00b4d8);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">📘</div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:800;color:#1a1a2e;">Outlook 行事曆</div>
+            <div style="font-size:12px;color:#888;margin-top:2px;">Microsoft 帳號登入</div>
+          </div>
+          <span style="color:#ccc;font-size:18px;">›</span>
+        </div>
+
+        <div style="text-align:center;font-size:11px;color:#bbb;padding:8px 0;">🔒 路伴僅讀取行程，不會修改或刪除任何事件</div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','cal-choose')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','cal-choose')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('ai','cal-choose')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
+      <div class="nav-item on"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /cal-choose -->
+
+
+  <!-- ═══════════ CAL AUTH ═══════════ -->
+  <div class="screen" id="cal-auth">
+    <div class="status-bar" style="background:#fff;color:#1a1a2e;">
+      <span class="time">9:41</span><div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="screen-body" style="background:#f8f7fc;display:flex;flex-direction:column;align-items:center;padding:0 0 90px;">
+      <!-- provider header -->
+      <div id="cal-auth-header" style="width:100%;background:#fff;padding:20px 20px 24px;border-bottom:1px solid #f0eaf8;text-align:center;">
+        <div id="cal-auth-logo" style="width:64px;height:64px;border-radius:18px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#4285f4,#34a853);">📆</div>
+        <div id="cal-auth-name" style="font-size:16px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">Google 日曆</div>
+        <div style="font-size:12px;color:#888;">請求以下存取權限</div>
+      </div>
+
+      <!-- permissions list -->
+      <div style="width:100%;padding:16px;">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="padding:14px 16px;border-bottom:1px solid #f5f0fc;display:flex;align-items:center;gap:12px;">
+            <span style="width:28px;height:28px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✓</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;">讀取行事曆事件</div><div style="font-size:11px;color:#888;margin-top:1px;">查看你的行程標題、時間與地點</div></div>
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #f5f0fc;display:flex;align-items:center;gap:12px;">
+            <span style="width:28px;height:28px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✓</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;">接收行程提醒通知</div><div style="font-size:11px;color:#888;margin-top:1px;">在出發前傳送最佳路線建議</div></div>
+          </div>
+          <div style="padding:14px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="width:28px;height:28px;border-radius:50%;background:#ffebee;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✗</span>
+            <div><div style="font-size:13px;font-weight:800;color:#1a1a2e;">不會修改或刪除事件</div><div style="font-size:11px;color:#888;margin-top:1px;">路伴僅有唯讀權限，資料安全</div></div>
+          </div>
+        </div>
+
+        <div style="background:#f3effe;border-radius:12px;padding:11px 14px;margin-top:10px;display:flex;align-items:flex-start;gap:8px;">
+          <span style="font-size:14px;margin-top:1px;">🔒</span>
+          <div style="font-size:11px;color:#5a3f85;line-height:1.5;">資料僅用於提供路線規劃服務，不會分享給第三方，可隨時在設定中取消連結。</div>
+        </div>
+      </div>
+
+      <!-- action buttons -->
+      <div style="width:100%;padding:0 16px;display:flex;flex-direction:column;gap:10px;">
+        <button onclick="goTo('cal-syncing','cal-auth')" style="background:var(--p);color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(123,94,167,.3);">
+          允許存取
+        </button>
+        <button onclick="goBack()" style="background:#f5f5f5;color:#888;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;">
+          拒絕
+        </button>
+      </div>
+    </div>
+  </div><!-- /cal-auth -->
+
+
+  <!-- ═══════════ CAL SYNCING ═══════════ -->
+  <div class="screen" id="cal-syncing">
+    <div class="status-bar" style="background:#fff;color:#1a1a2e;">
+      <span class="time">9:41</span><div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:#f8f7fc;">
+      <!-- spinner -->
+      <div id="sync-icon" style="width:80px;height:80px;border-radius:50%;background:var(--pb);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px;animation:syncPulse 1.4s ease-in-out infinite;">📅</div>
+      <div id="sync-title" style="font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:8px;">正在連結行事曆…</div>
+      <div id="sync-sub" style="font-size:13px;color:#888;margin-bottom:28px;">請稍候，路伴正在讀取你的行程</div>
+
+      <!-- progress bar -->
+      <div style="width:100%;background:#e8e0f5;border-radius:10px;height:8px;margin-bottom:12px;overflow:hidden;">
+        <div id="sync-bar" style="background:linear-gradient(90deg,var(--p),var(--pl));height:100%;border-radius:10px;width:0%;transition:width .5s ease;"></div>
+      </div>
+      <div id="sync-pct" style="font-size:12px;color:var(--p);font-weight:800;margin-bottom:24px;">0%</div>
+
+      <!-- sync log -->
+      <div id="sync-log" style="width:100%;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,.05);min-height:120px;">
+        <div id="sync-log-items" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+    </div>
+  </div><!-- /cal-syncing -->
+
+
+  <!-- ═══════════ CAL DONE ═══════════ -->
+  <div class="screen" id="cal-done">
+    <div class="status-bar" style="background:#fff;color:#1a1a2e;">
+      <span class="time">9:41</span><div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <!-- success header -->
+    <div style="background:linear-gradient(150deg,#1b5e20,#43a047);padding:28px 20px 24px;text-align:center;flex-shrink:0;">
+      <div style="width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.22);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:34px;">✅</div>
+      <div style="color:#fff;font-size:20px;font-weight:900;margin-bottom:6px;">連結成功！</div>
+      <div style="color:rgba(255,255,255,.8);font-size:13px;">已匯入 8 個行程，路伴將自動提醒出發時間</div>
+    </div>
+
+    <div class="screen-body" style="background:#f8f7fc;padding-bottom:90px;">
+      <!-- stats row -->
+      <div style="display:flex;gap:8px;padding:14px 16px 0;">
+        <div style="flex:1;background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="font-size:22px;font-weight:900;color:var(--p);">8</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">已匯入行程</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="font-size:22px;font-weight:900;color:#43a047;">3</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">本週即將出發</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="font-size:22px;font-weight:900;color:#e65100;">1</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">今日行程</div>
+        </div>
+      </div>
+
+      <!-- synced events -->
+      <div style="padding:14px 16px 0;">
+        <div style="font-size:13px;font-weight:800;color:#888;margin-bottom:10px;">📋 已同步的行程</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+
+          <div style="background:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:3px solid var(--p);">
+            <div style="background:var(--pb);border-radius:10px;padding:8px;font-size:18px;flex-shrink:0;">📆</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:800;color:#1a1a2e;">產品會議</div>
+              <div style="font-size:11px;color:#888;margin-top:1px;">今天 09:00 · 信義區辦公室</div>
+            </div>
+            <div style="background:#e8f5e9;color:#2e7d32;border-radius:8px;padding:3px 8px;font-size:10px;font-weight:800;">今天</div>
+          </div>
+
+          <div style="background:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:3px solid #43a047;">
+            <div style="background:#e8f5e9;border-radius:10px;padding:8px;font-size:18px;flex-shrink:0;">📆</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:800;color:#1a1a2e;">高鐵還彼</div>
+              <div style="font-size:11px;color:#888;margin-top:1px;">今天 14:30 · 台北車站</div>
+            </div>
+            <div style="background:#fff3e0;color:#e65100;border-radius:8px;padding:3px 8px;font-size:10px;font-weight:800;">今天</div>
+          </div>
+
+          <div style="background:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:3px solid #1e88e5;">
+            <div style="background:#e3f2fd;border-radius:10px;padding:8px;font-size:18px;flex-shrink:0;">📆</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:800;color:#1a1a2e;">週五 Design Review</div>
+              <div style="font-size:11px;color:#888;margin-top:1px;">05/16 14:00 · 大安區</div>
+            </div>
+            <div style="background:#e3f2fd;color:#1565c0;border-radius:8px;padding:3px 8px;font-size:10px;font-weight:800;">本週</div>
+          </div>
+
+          <div style="background:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:3px solid #888;">
+            <div style="background:#f5f5f5;border-radius:10px;padding:8px;font-size:18px;flex-shrink:0;">📆</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:800;color:#1a1a2e;">其他 5 個行程…</div>
+              <div style="font-size:11px;color:#888;margin-top:1px;">未來 30 天內</div>
+            </div>
+            <span style="color:#ccc;font-size:16px;">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="padding:16px;">
+        <button onclick="goTo('itinerary','cal-done')" style="width:100%;background:var(--p);color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(123,94,167,.3);">
+          📅 查看完整行程
+        </button>
+        <!-- update profile badge -->
+        <div id="update-profile-badge" style="margin-top:10px;text-align:center;font-size:12px;color:var(--p);font-weight:700;cursor:pointer;" onclick="updateProfileCalBadge(); goTo('profile','cal-done');">
+          返回「我的」頁面
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','cal-done')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','cal-done')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('ai','cal-done')"><span class="nav-icon">🤖</span><span class="nav-label">AI助手</span></div>
+      <div class="nav-item on"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /cal-done -->
 
 
   <!-- ═══════════ RAIN MODAL ═══════════ -->
@@ -1565,6 +1997,11 @@
     100% { transform: translateY(130px) skewX(-10deg); opacity:0; }
   }
 
+  @keyframes syncPulse {
+    0%,100% { transform: scale(1);   opacity: 1; }
+    50%      { transform: scale(1.1); opacity: .75; }
+  }
+
   /* rain mode changes on route page */
   .rain-mode-banner {
     background:linear-gradient(135deg,#e3f2fd,#bbdefb);
@@ -1592,10 +2029,11 @@
 </style>
 
 <script>
-  const ORDER = ['home','route','detail','detail-rain','explore','itinerary','ai','profile'];
+  const ORDER = ['home','route','detail','detail-rain','explore','itinerary','ai','ai-game','profile','cal-landing','cal-choose','cal-auth','cal-syncing','cal-done'];
   let current = 'home';
   const stack = ['home'];
   let rainShown = false;
+  let calProvider = 'google';
 
   function goTo(id, from) {
     if (id === current) return;
@@ -1629,10 +2067,8 @@
     stack.push(id);
     current = id;
 
-    // trigger rain alert when arriving at route page
-    if (id === 'route' && !rainShown) {
-      setTimeout(showRainAlert, 900);
-    }
+    if (id === 'route' && !rainShown) setTimeout(showRainAlert, 900);
+    if (id === 'cal-syncing') setTimeout(startSync, 400);
   }
 
   function goBack() {
@@ -1662,6 +2098,103 @@
     });
 
     current = prev;
+  }
+
+  /* ── Quiz logic ── */
+  function selectAnswer(el, isCorrect) {
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts.forEach(o => o.style.pointerEvents = 'none');
+    const feedback = document.getElementById('quiz-feedback');
+    if (isCorrect) {
+      el.style.background = '#e8f5e9';
+      el.style.borderColor = '#43a047';
+      el.querySelector('span').style.background = '#43a047';
+      el.querySelector('span').style.color = '#fff';
+      feedback.style.display = 'block';
+      feedback.style.background = '#e8f5e9';
+      feedback.style.color = '#2e7d32';
+      feedback.innerHTML = '🎉 答對了！+30 XP<br><span style="font-size:11px;font-weight:500;">台北101/世貿站 (Y9) 正是板南線上最靠近101的站點</span>';
+    } else {
+      el.style.background = '#ffebee';
+      el.style.borderColor = '#ef5350';
+      el.querySelector('span').style.background = '#ef5350';
+      el.querySelector('span').style.color = '#fff';
+      // highlight correct
+      opts[1].style.background = '#e8f5e9';
+      opts[1].style.borderColor = '#43a047';
+      opts[1].querySelectorAll('span')[0].style.background = '#43a047';
+      opts[1].querySelectorAll('span')[0].style.color = '#fff';
+      feedback.style.display = 'block';
+      feedback.style.background = '#ffebee';
+      feedback.style.color = '#c62828';
+      feedback.innerHTML = '❌ 答錯了！正確答案是 B<br><span style="font-size:11px;font-weight:500;">台北101/世貿站 (Y9) 正是板南線上最靠近101的站點</span>';
+    }
+  }
+
+  /* ── Calendar provider selection ── */
+  const calMeta = {
+    google:  { label:'Google 日曆',   bg:'linear-gradient(135deg,#4285f4,#34a853)', icon:'📆' },
+    apple:   { label:'Apple 行事曆',  bg:'#1c1c2e',                                icon:'🍎' },
+    yahoo:   { label:'Yahoo! 行事曆', bg:'linear-gradient(135deg,#6001d2,#7b1fa2)',icon:'Y!' },
+    outlook: { label:'Outlook 行事曆',bg:'linear-gradient(135deg,#0078d4,#00b4d8)',icon:'📘' },
+  };
+  function selectCalProvider(key) {
+    calProvider = key;
+    const m = calMeta[key];
+    document.getElementById('cal-auth-logo').style.background = m.bg;
+    document.getElementById('cal-auth-logo').textContent = m.icon;
+    document.getElementById('cal-auth-name').textContent = m.label;
+    goTo('cal-auth','cal-choose');
+  }
+
+  /* ── Syncing animation ── */
+  function startSync() {
+    const bar  = document.getElementById('sync-bar');
+    const pct  = document.getElementById('sync-pct');
+    const log  = document.getElementById('sync-log-items');
+    const title= document.getElementById('sync-title');
+    const sub  = document.getElementById('sync-sub');
+    const icon = document.getElementById('sync-icon');
+    bar.style.width = '0%'; pct.textContent = '0%'; log.innerHTML = '';
+
+    const steps = [
+      { p:18, msg:'🔗 授權驗證完成' },
+      { p:35, msg:'📋 讀取行事曆清單…' },
+      { p:52, msg:'📅 匯入本週行程 (3 個)' },
+      { p:70, msg:'📅 匯入未來行程 (5 個)' },
+      { p:85, msg:'📍 解析地點資訊…' },
+      { p:100,msg:'✅ 同步完成！共 8 個行程' },
+    ];
+    let i = 0;
+    const tick = setInterval(() => {
+      if (i >= steps.length) { clearInterval(tick); return; }
+      const s = steps[i++];
+      bar.style.width = s.p + '%';
+      pct.textContent = s.p + '%';
+      const item = document.createElement('div');
+      item.style.cssText = 'font-size:12px;color:#555;display:flex;align-items:center;gap:6px;';
+      item.textContent = s.msg;
+      log.appendChild(item);
+      if (s.p === 100) {
+        setTimeout(() => {
+          title.textContent = '連結成功！🎉';
+          sub.textContent = '已匯入 8 個行程';
+          icon.textContent = '✅';
+          icon.style.animation = 'none';
+          icon.style.background = '#e8f5e9';
+          setTimeout(() => goTo('cal-done','cal-syncing'), 900);
+        }, 400);
+      }
+    }, 550);
+  }
+
+  /* ── Update profile calendar badge after connection ── */
+  function updateProfileCalBadge() {
+    const row = document.querySelector('#profile .pref-row[onclick]');
+    if (row) {
+      const badge = row.querySelector('span[style*="fff3e0"]');
+      if (badge) { badge.style.background='#e8f5e9'; badge.style.color='#2e7d32'; badge.textContent='已連結'; }
+    }
   }
 
   /* ── Rain modal logic ── */
