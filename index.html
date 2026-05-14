@@ -2129,6 +2129,8 @@
   const stack = ['home'];
   let rainShown = false;
   let calProvider = 'google';
+  let calConnected = false;
+  let cnyShown = false;
 
   function goTo(id, from) {
     if (id === current) return;
@@ -2164,7 +2166,8 @@
 
     if (id === 'route' && !rainShown) setTimeout(showRainAlert, 900);
     if (id === 'cal-syncing') setTimeout(startSync, 400);
-    if (id === 'cal-done') setTimeout(showCny, 3000);
+    if (id === 'cal-done') calConnected = true;
+    if (id === 'home' && calConnected && !cnyShown) { cnyShown = true; setTimeout(showCny, 800); }
   }
 
   function goBack() {
