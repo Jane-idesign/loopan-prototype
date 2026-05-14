@@ -2166,8 +2166,7 @@
 
     if (id === 'route' && !rainShown) setTimeout(showRainAlert, 900);
     if (id === 'cal-syncing') setTimeout(startSync, 400);
-    if (id === 'cal-done') calConnected = true;
-    if (id === 'home' && calConnected && !cnyShown) { cnyShown = true; setTimeout(showCny, 800); }
+    if (id === 'cal-done' && !cnyShown) { cnyShown = true; calConnected = true; setTimeout(showCny, 3000); }
   }
 
   function goBack() {
