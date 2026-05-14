@@ -1264,12 +1264,338 @@
     </div>
   </div><!-- /profile -->
 
+
+  <!-- ═══════════ RAIN-SAFE DETAIL ═══════════ -->
+  <div class="screen" id="detail-rain">
+    <div class="status-bar" style="background:#fff; color:#1a1a2e;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="detail-head" style="border-bottom:2px solid #e3f2fd;">
+      <div class="detail-topbar">
+        <div class="back-btn" onclick="goBack()" style="color:#1565c0;">‹ 公車 + 捷運</div>
+        <span class="detail-dur" style="color:#1565c0;">35分鐘</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div class="detail-eta">⏱ 09:32 預計抵達</div>
+        <div style="background:#e3f2fd; color:#1565c0; border-radius:20px; padding:4px 10px; font-size:11px; font-weight:800;">🛖 全程有遮蔽</div>
+      </div>
+    </div>
+
+    <!-- rain banner -->
+    <div style="background:linear-gradient(135deg,#1565c0,#1e88e5); margin:12px 16px 0; border-radius:14px; padding:12px 14px; display:flex; align-items:center; gap:10px;">
+      <span style="font-size:24px;">🌧️</span>
+      <div>
+        <div style="color:#fff; font-size:13px; font-weight:800; margin-bottom:2px;">雨天建議路線</div>
+        <div style="color:rgba(255,255,255,.8); font-size:11px;">步行路段皆有頂蓋，不怕淋雨</div>
+      </div>
+    </div>
+
+    <div class="screen-body" style="padding-bottom:150px;">
+      <div class="steps" style="padding-top:16px;">
+
+        <!-- origin -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle filled" style="border-color:#1565c0; background:#1565c0;"></div>
+            <div class="s-vdash" style="background:repeating-linear-gradient(to bottom,#90caf9 0,#90caf9 4px,transparent 4px,transparent 8px);"></div>
+          </div>
+          <div class="step-r">
+            <div style="display:flex; justify-content:space-between;">
+              <div class="s-name">我的位置</div>
+              <div class="s-time" style="color:#1565c0;">09:05 出發</div>
+            </div>
+            <div class="s-sub">步行 2 分鐘（150m）↓ 有騎樓遮蔽</div>
+            <div style="display:inline-flex; align-items:center; gap:4px; background:#e3f2fd; border-radius:8px; padding:3px 8px; margin-top:5px; font-size:10px; color:#1565c0; font-weight:700;">🛖 騎樓全程覆蓋</div>
+          </div>
+        </div>
+
+        <!-- bus stop -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle" style="border-color:#fb8c00; background:#fb8c00;"></div>
+            <div class="s-vline" style="background:#fb8c00;"></div>
+          </div>
+          <div class="step-r">
+            <div>
+              <span class="s-name" style="display:inline;">忠孝復興公車站</span>
+              <span class="metro-tag" style="background:#fff3e0; color:#e65100;">公車 265</span>
+            </div>
+            <div class="s-sub">09:08 搭車・有候車亭遮蔽</div>
+            <div style="background:#fff3e0; border-radius:10px; padding:8px 11px; margin-top:6px; font-size:11px; color:#e65100; font-weight:700;">
+              🚌 搭乘 3 站（6 分鐘）→ 忠孝復興捷運站
+            </div>
+          </div>
+        </div>
+
+        <!-- underground transfer -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle filled" style="border-color:#7b5ea7; background:#7b5ea7;"></div>
+            <div class="s-vline" style="background:#7b5ea7;"></div>
+          </div>
+          <div class="step-r">
+            <div>
+              <span class="s-name" style="display:inline;">忠孝復興站</span>
+              <span class="metro-tag">板南線</span>
+            </div>
+            <div class="s-sub">往南港展覽館方向</div>
+            <div class="s-sub">09:16 進站・B1 地下通道直達</div>
+            <div style="display:inline-flex; align-items:center; gap:4px; background:#e3f2fd; border-radius:8px; padding:3px 8px; margin-top:5px; font-size:10px; color:#1565c0; font-weight:700;">🚇 地下轉乘，零淋雨</div>
+            <div style="background:#f3effe; border-radius:10px; padding:8px 11px; margin-top:6px; font-size:11px; color:#7b5ea7; font-weight:700;">
+              🚇 搭乘 3 站（8 分鐘）
+            </div>
+          </div>
+        </div>
+
+        <!-- destination -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle dest"></div>
+          </div>
+          <div class="step-r" style="padding-bottom:8px;">
+            <div style="display:flex; justify-content:space-between;">
+              <div class="s-name dest">台北車站</div>
+              <div style="font-size:12px; font-weight:800; color:var(--red);">09:32 抵達 ✓</div>
+            </div>
+            <div class="s-sub">M3 出口・室內直達</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="alert-card" style="border-left:3px solid #1565c0;">
+        <span style="font-size:22px;">☂️</span>
+        <div class="alert-main">
+          <h4 style="color:#1565c0;">雨天提醒</h4>
+          <p>建議攜帶摺疊傘，出口仍需短暫步行</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-actions" style="border-top:1px solid #e3f2fd;">
+      <button class="act-btn" style="background:#e3f2fd; color:#1565c0;">📤 分享</button>
+      <button class="act-btn" style="background:#e3f2fd; color:#1565c0;">⭐ 常用</button>
+      <button class="nav-start" style="background:#1565c0;">開始導航 ›</button>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','detail-rain')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','detail-rain')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','detail-rain')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /detail-rain -->
+
+
+  <!-- ═══════════ RAIN MODAL ═══════════ -->
+  <div id="rain-overlay" style="
+    position:absolute; inset:0; z-index:500;
+    background:rgba(15,20,40,0); pointer-events:none;
+    transition:background .35s ease;
+    display:flex; flex-direction:column; justify-content:flex-end;
+  ">
+    <div id="rain-sheet" style="
+      background:#fff; border-radius:28px 28px 0 0;
+      transform:translateY(100%);
+      transition:transform .4s cubic-bezier(0.32,0.72,0,1);
+      overflow:hidden;
+      box-shadow:0 -8px 40px rgba(0,0,0,.18);
+    ">
+
+      <!-- rain animation header -->
+      <div id="rain-header" style="
+        background:linear-gradient(160deg,#0d2b6e 0%,#1565c0 50%,#1e88e5 100%);
+        padding:20px 20px 16px;
+        position:relative; overflow:hidden;
+      ">
+        <!-- animated rain drops -->
+        <div class="rain-drops" aria-hidden="true"></div>
+
+        <div style="position:relative; z-index:2;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(255,255,255,.15);
+              display:flex; align-items:center; justify-content:center; font-size:22px;
+            ">⛈️</div>
+            <div>
+              <div style="color:#fff; font-size:17px; font-weight:900; letter-spacing:.2px;">目前正在下大雨</div>
+              <div style="color:rgba(255,255,255,.75); font-size:12px; margin-top:1px;">台北市・大雨特報生效中</div>
+            </div>
+            <div id="rain-close" onclick="dismissRain()" style="
+              margin-left:auto; width:28px; height:28px;
+              background:rgba(255,255,255,.18); border-radius:50%;
+              display:flex; align-items:center; justify-content:center;
+              color:#fff; font-size:14px; cursor:pointer; flex-shrink:0;
+            ">✕</div>
+          </div>
+
+          <!-- affected route -->
+          <div style="background:rgba(255,255,255,.12); border-radius:12px; padding:10px 12px;">
+            <div style="color:rgba(255,255,255,.7); font-size:10px; font-weight:700; margin-bottom:6px;">⚠️ 原路線可能受影響</div>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div>
+                <div style="color:#fff; font-size:14px; font-weight:800;">捷運 + 步行・28 分鐘</div>
+                <div style="color:rgba(255,255,255,.65); font-size:11px; margin-top:2px;">步行 750m 路段無遮蔽，雨中濕滑</div>
+              </div>
+              <div style="background:#ef5350; color:#fff; border-radius:8px; padding:4px 9px; font-size:10px; font-weight:800;">高影響</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- suggested route -->
+      <div style="padding:16px 16px 6px;">
+        <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">🤖 路伴建議改走</div>
+
+        <div id="rain-suggest-card" onclick="acceptRainRoute()" style="
+          background:#f0f7ff; border-radius:16px; padding:14px;
+          border:2px solid #1e88e5; cursor:pointer;
+          transition:transform .12s;
+        ">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                <span style="background:#e3f2fd; color:#1565c0; border-radius:20px; padding:3px 10px; font-size:11px; font-weight:800;">雨天首選</span>
+                <span style="background:#e8f5e9; color:#2e7d32; border-radius:20px; padding:3px 10px; font-size:11px; font-weight:800;">全程有遮蔽</span>
+              </div>
+              <div style="display:flex; align-items:baseline; gap:2px;">
+                <span style="font-size:30px; font-weight:900; color:#1565c0; line-height:1;">35</span>
+                <span style="font-size:12px; color:#888;">分鐘</span>
+              </div>
+              <div style="font-size:12px; color:#555; margin-top:2px;">公車 265 + 捷運板南線</div>
+              <div style="font-size:11px; color:#888;">步行僅 150m，全程騎樓 + 地下道</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:12px; font-weight:800; color:#1565c0;">預計 09:32 抵達</div>
+              <div style="font-size:11px; color:#aaa; margin-top:2px;">多 7 分鐘</div>
+            </div>
+          </div>
+
+          <!-- route steps visual -->
+          <div style="display:flex; align-items:center; gap:4px; height:14px;">
+            <div style="width:9px; height:9px; border-radius:50%; background:#1565c0; flex-shrink:0;"></div>
+            <div style="flex:0.6; height:3px; background:#fb8c00; border-radius:2px;"></div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#fb8c00; flex-shrink:0;"></div>
+            <div style="flex:1; height:3px; background:#7b5ea7; border-radius:2px;"></div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#7b5ea7; flex-shrink:0;"></div>
+            <div style="flex:0.3; height:3px; background:#aaa; border-radius:2px;"></div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#e53935; flex-shrink:0;"></div>
+          </div>
+
+          <div style="margin-top:10px; background:rgba(30,136,229,.1); border-radius:8px; padding:7px 10px; font-size:11px; color:#1565c0; font-weight:700;">
+            🛖 騎樓→ 候車亭 → 地下通道 → 室內出口，濕身指數 5%
+          </div>
+        </div>
+      </div>
+
+      <!-- action buttons -->
+      <div style="padding:12px 16px 28px; display:flex; gap:10px;">
+        <button onclick="dismissRain()" style="
+          flex:1; background:#f5f5f5; color:#555;
+          border:none; border-radius:14px; padding:13px;
+          font-size:14px; font-weight:700; cursor:pointer;
+        ">繼續原路線</button>
+        <button onclick="acceptRainRoute()" style="
+          flex:1.5; background:linear-gradient(135deg,#1565c0,#1e88e5); color:#fff;
+          border:none; border-radius:14px; padding:13px;
+          font-size:14px; font-weight:800; cursor:pointer;
+          box-shadow:0 4px 16px rgba(21,101,192,.35);
+        ">☂️ 改走建議路線</button>
+      </div>
+
+    </div>
+  </div><!-- /rain-modal -->
+
 </div><!-- /phone -->
 
+<style>
+  /* ── rain drop animation ── */
+  .rain-drops {
+    position:absolute; inset:0; overflow:hidden; pointer-events:none;
+  }
+  .rain-drops::before,
+  .rain-drops::after {
+    content:'';
+    position:absolute;
+    width:1px; height:18px;
+    background:rgba(255,255,255,.25);
+    top:-18px;
+    animation: rainFall 1.1s linear infinite;
+  }
+  .rain-drops::before {
+    left:15%; animation-delay:0s; animation-duration:1.0s;
+    box-shadow:
+      28px 12px 0 rgba(255,255,255,.2),
+      55px 0px 0 rgba(255,255,255,.15),
+      82px 20px 0 rgba(255,255,255,.2),
+      110px 5px 0 rgba(255,255,255,.18),
+      138px 15px 0 rgba(255,255,255,.22),
+      165px 0px 0 rgba(255,255,255,.15),
+      192px 8px 0 rgba(255,255,255,.2),
+      220px 18px 0 rgba(255,255,255,.17),
+      248px 3px 0 rgba(255,255,255,.22),
+      276px 12px 0 rgba(255,255,255,.18),
+      304px 0px 0 rgba(255,255,255,.2),
+      332px 16px 0 rgba(255,255,255,.15);
+  }
+  .rain-drops::after {
+    left:8%; animation-delay:0.55s; animation-duration:1.2s;
+    box-shadow:
+      20px 0px 0 rgba(255,255,255,.18),
+      48px 14px 0 rgba(255,255,255,.22),
+      76px 6px 0 rgba(255,255,255,.17),
+      104px 20px 0 rgba(255,255,255,.2),
+      132px 2px 0 rgba(255,255,255,.18),
+      160px 10px 0 rgba(255,255,255,.22),
+      188px 18px 0 rgba(255,255,255,.15),
+      216px 4px 0 rgba(255,255,255,.2),
+      244px 14px 0 rgba(255,255,255,.18),
+      272px 8px 0 rgba(255,255,255,.22),
+      300px 0px 0 rgba(255,255,255,.17),
+      328px 12px 0 rgba(255,255,255,.2);
+  }
+  @keyframes rainFall {
+    0%   { transform: translateY(-18px) skewX(-10deg); opacity:0; }
+    10%  { opacity:1; }
+    90%  { opacity:1; }
+    100% { transform: translateY(130px) skewX(-10deg); opacity:0; }
+  }
+
+  /* rain mode changes on route page */
+  .rain-mode-banner {
+    background:linear-gradient(135deg,#e3f2fd,#bbdefb);
+    margin:10px 16px 0;
+    border-radius:14px;
+    padding:10px 14px;
+    display:flex; align-items:center; gap:10px;
+    border-left:3px solid #1565c0;
+  }
+
+  .route-card.rain-warning {
+    border-color:#ef9a9a !important;
+    position:relative;
+  }
+  .rain-warning-badge {
+    position:absolute; top:10px; right:10px;
+    background:#ffebee; color:#c62828;
+    border-radius:8px; padding:3px 8px; font-size:10px; font-weight:800;
+  }
+
+  .route-card.rain-recommended {
+    border-color:#1e88e5 !important;
+    background:linear-gradient(to bottom right,#f9fdff,#e8f4fd);
+  }
+</style>
+
 <script>
-  const ORDER = ['home','route','detail','explore','itinerary','ai','profile'];
+  const ORDER = ['home','route','detail','detail-rain','explore','itinerary','ai','profile'];
   let current = 'home';
   const stack = ['home'];
+  let rainShown = false;
 
   function goTo(id, from) {
     if (id === current) return;
@@ -1279,7 +1605,7 @@
 
     const ci = ORDER.indexOf(current);
     const ni = ORDER.indexOf(id);
-    const forward = ni > ci || id === 'detail';
+    const forward = ni > ci || id === 'detail' || id === 'detail-rain';
 
     nxt.style.transition = 'none';
     nxt.style.transform = forward ? 'translateX(100%)' : 'translateX(-28%)';
@@ -1302,6 +1628,11 @@
 
     stack.push(id);
     current = id;
+
+    // trigger rain alert when arriving at route page
+    if (id === 'route' && !rainShown) {
+      setTimeout(showRainAlert, 900);
+    }
   }
 
   function goBack() {
@@ -1331,6 +1662,83 @@
     });
 
     current = prev;
+  }
+
+  /* ── Rain modal logic ── */
+  function showRainAlert() {
+    rainShown = true;
+    const overlay = document.getElementById('rain-overlay');
+    const sheet   = document.getElementById('rain-sheet');
+    overlay.style.pointerEvents = 'auto';
+    overlay.style.background = 'rgba(15,20,40,0.55)';
+    sheet.style.transform = 'translateY(0)';
+  }
+
+  function dismissRain() {
+    const overlay = document.getElementById('rain-overlay');
+    const sheet   = document.getElementById('rain-sheet');
+    sheet.style.transform = 'translateY(100%)';
+    overlay.style.background = 'rgba(15,20,40,0)';
+    overlay.style.pointerEvents = 'none';
+
+    // show rain warning banner and mark affected route on the route page
+    applyRainModeToRoutePage();
+  }
+
+  function acceptRainRoute() {
+    const overlay = document.getElementById('rain-overlay');
+    const sheet   = document.getElementById('rain-sheet');
+    sheet.style.transform = 'translateY(100%)';
+    overlay.style.background = 'rgba(15,20,40,0)';
+    overlay.style.pointerEvents = 'none';
+
+    applyRainModeToRoutePage();
+
+    // navigate to rain-safe route detail
+    setTimeout(() => goTo('detail-rain', 'route'), 280);
+  }
+
+  function applyRainModeToRoutePage() {
+    // add rain banner if not already there
+    if (!document.getElementById('rain-banner')) {
+      const routeBody = document.querySelector('#route .screen-body');
+      const banner = document.createElement('div');
+      banner.id = 'rain-banner';
+      banner.className = 'rain-mode-banner';
+      banner.innerHTML = `
+        <span style="font-size:20px;">🌧️</span>
+        <div style="flex:1;">
+          <div style="font-size:13px; font-weight:800; color:#1565c0;">大雨特報生效中</div>
+          <div style="font-size:11px; color:#555; margin-top:1px;">建議選擇有遮蔽路線，減少步行淋雨</div>
+        </div>
+      `;
+      routeBody.insertBefore(banner, routeBody.firstChild);
+    }
+
+    // mark first card (fastest) as rain-affected
+    const cards = document.querySelectorAll('#route .route-card');
+    if (cards[0] && !cards[0].querySelector('.rain-warning-badge')) {
+      cards[0].classList.add('rain-warning');
+      cards[0].classList.remove('hl');
+      const badge = document.createElement('div');
+      badge.className = 'rain-warning-badge';
+      badge.textContent = '⚠️ 步行段無遮蔽';
+      cards[0].appendChild(badge);
+    }
+
+    // highlight second card (least walk) as rain recommended
+    if (cards[1]) {
+      cards[1].classList.add('rain-recommended');
+      if (!cards[1].querySelector('.rain-rec-tag')) {
+        const tag = document.createElement('div');
+        tag.className = 'rain-rec-tag';
+        tag.style.cssText = 'background:#1e88e5;color:#fff;border-radius:8px;padding:3px 9px;font-size:10px;font-weight:800;display:inline-block;margin-bottom:6px;';
+        tag.textContent = '☂️ 雨天建議';
+        cards[1].insertBefore(tag, cards[1].firstChild);
+        // make it navigate to rain detail
+        cards[1].setAttribute('onclick', "goTo('detail-rain','route')");
+      }
+    }
   }
 </script>
 </body>
