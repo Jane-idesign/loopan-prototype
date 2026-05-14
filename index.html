@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路伴 LooPan — App Prototype</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: linear-gradient(135deg, #ede7f6 0%, #dce8f8 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+      padding: 24px 0;
+    }
+
+    .page-title {
+      font-size: 13px;
+      color: #9575cd;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    /* ────── Phone shell ────── */
+    .phone {
+      width: 375px;
+      height: 812px;
+      background: #f8f7fc;
+      border-radius: 48px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 10px #1c1c2e,
+        0 0 0 13px #38385a,
+        0 24px 80px rgba(0,0,0,0.45),
+        0 8px 20px rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    /* notch */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 28px;
+      background: #1c1c2e;
+      border-radius: 0 0 20px 20px;
+      z-index: 9999;
+    }
+
+    /* ────── Screens ────── */
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: #f8f7fc;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .screen.active   { transform: translateX(0); }
+    .screen.slide-left { transform: translateX(-28%); }
+
+    /* ────── Status bar ────── */
+    .status-bar {
+      height: 44px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 22px 6px;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 600;
+      position: relative;
+      z-index: 10;
+    }
+    .status-bar .time { font-size: 15px; font-weight: 700; }
+    .status-icons { display: flex; align-items: center; gap: 5px; font-size: 11px; }
+
+    /* ────── Scrollable area ────── */
+    .screen-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 80px;
+    }
+    .screen-body::-webkit-scrollbar { display: none; }
+
+    /* ────── Bottom nav ────── */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: #fff;
+      border-top: 1px solid #ede8f8;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 8px;
+      z-index: 200;
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      padding: 2px 0;
+    }
+    .nav-icon { font-size: 22px; }
+    .nav-label { font-size: 10px; color: #aaa; }
+    .nav-item.on .nav-label { color: #7b5ea7; font-weight: 700; }
+
+    /* ────── Design tokens ────── */
+    :root {
+      --p:  #7b5ea7;
+      --pl: #9b7ec8;
+      --pb: #f3effe;
+      --green: #43a047;
+      --orange: #fb8c00;
+      --red: #e53935;
+      --blue: #1e88e5;
+    }
+
+    /* ────── Shared helpers ────── */
+    .card { background: #fff; border-radius: 16px; overflow: hidden; }
+
+    .chip {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .chip.fastest   { background: #e8f5e9; color: #2e7d32; }
+    .chip.leastwalk { background: #e3f2fd; color: #1565c0; }
+    .chip.cheapest  { background: #fff8e1; color: #e65100; }
+    .chip.safe      { background: #ede7f6; color: #4a148c; }
+
+    /* ══════════════════════════════════════════
+       HOME
+    ══════════════════════════════════════════ */
+    #home .status-bar { color: #fff; }
+
+    .home-hero {
+      background: linear-gradient(150deg, #6a3fa0 0%, #9b7ec8 65%, #c0a8e8 100%);
+      padding: 0 16px 20px;
+      border-radius: 0 0 32px 32px;
+    }
+    .home-topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0 10px;
+    }
+    .home-logo {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; font-size: 18px; font-weight: 800;
+    }
+    .logo-bubble {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.22);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .bell { font-size: 22px; cursor: pointer; color: rgba(255,255,255,0.9); }
+
+    .home-greeting { color: #fff; margin-bottom: 10px; }
+    .home-greeting h2 { font-size: 21px; font-weight: 800; margin-bottom: 3px; }
+    .home-greeting p  { font-size: 13px; opacity: 0.9; }
+
+    .weather-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .w-chip {
+      background: rgba(255,255,255,0.18);
+      color: #fff; border-radius: 20px;
+      padding: 5px 11px; font-size: 12px;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .trip-banner {
+      background: rgba(255,255,255,0.16);
+      border-radius: 16px; padding: 12px 14px;
+      color: #fff;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .trip-badge { font-size: 10px; opacity: 0.75; margin-bottom: 4px; }
+    .trip-name  { font-size: 15px; font-weight: 800; }
+    .trip-hint  { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+    .view-btn {
+      background: #fff; color: var(--p);
+      border: none; border-radius: 20px;
+      padding: 8px 14px; font-size: 13px; font-weight: 800;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* Search */
+    .search-wrap { padding: 14px 16px 4px; }
+    .search-box {
+      background: #fff; border-radius: 16px;
+      padding: 13px 16px;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 2px 14px rgba(123,94,167,.1);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color .18s;
+    }
+    .search-box:active { border-color: var(--p); }
+    .search-placeholder { color: #bbb; font-size: 14px; }
+
+    /* Quick grid */
+    .quick-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      padding: 6px 8px;
+    }
+    .q-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; padding: 10px 4px;
+      cursor: pointer; border-radius: 14px;
+      transition: background .15s;
+    }
+    .q-item:active { background: #ede8ff; }
+    .q-icon {
+      width: 50px; height: 50px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .q-label { font-size: 11px; color: #333; text-align: center; }
+
+    /* Rec cards */
+    .section-header { padding: 4px 16px 10px; }
+    .section-header h3 { font-size: 16px; font-weight: 800; color: #1a1a2e; }
+    .rec-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 12px; }
+    .rec-scroll::-webkit-scrollbar { display: none; }
+    .rec-card {
+      flex-shrink: 0; width: 122px;
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .rec-img {
+      width: 100%; height: 72px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+    }
+    .rec-info { padding: 8px 9px 10px; }
+    .rec-title { font-size: 11px; font-weight: 700; color: #333; margin-bottom: 2px; }
+    .rec-sub   { font-size: 10px; color: #aaa; }
+
+    /* AI FAB */
+    .ai-fab {
+      position: absolute; bottom: 88px; right: 14px;
+      width: 54px; height: 54px;
+      background: linear-gradient(135deg, var(--p), var(--pl));
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff; font-size: 9px; font-weight: 800;
+      box-shadow: 0 4px 18px rgba(123,94,167,.45);
+      cursor: pointer; z-index: 50; line-height: 1.3;
+    }
+
+    /* ══════════════════════════════════════════
+       ROUTE PLANNING
+    ══════════════════════════════════════════ */
+    .route-head { background: #fff; padding: 10px 16px 16px; }
+
+    .mode-tabs {
+      display: flex; background: var(--pb);
+      border-radius: 12px; padding: 4px; margin-bottom: 14px;
+    }
+    .mode-tab {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 2px;
+      padding: 6px 2px; border-radius: 8px;
+      font-size: 9px; color: #999; cursor: pointer;
+      transition: all .2s;
+    }
+    .mode-tab .mi { font-size: 18px; }
+    .mode-tab.on { background: #fff; color: var(--p); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+
+    .loc-inputs { position: relative; display: flex; flex-direction: column; gap: 7px; }
+    .loc-row {
+      display: flex; align-items: center; gap: 10px;
+      background: #f8f7fc; border-radius: 12px; padding: 12px 14px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .dot.o { background: var(--p); }
+    .dot.d { background: var(--red); }
+    .loc-text { font-size: 14px; color: #333; }
+    .swap {
+      position: absolute; right: 10px; top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px; background: #fff;
+      border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; cursor: pointer;
+    }
+
+    .route-ctrls { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
+    .depart-pill {
+      flex: 1; background: #f8f7fc;
+      border-radius: 10px; padding: 10px 12px;
+      font-size: 13px; color: #555;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .search-btn {
+      background: var(--p); color: #fff;
+      border: none; border-radius: 10px;
+      padding: 10px 20px; font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+
+    .routes-label {
+      font-size: 13px; font-weight: 700;
+      color: #888; padding: 14px 16px 8px;
+    }
+
+    .route-card {
+      background: #fff; margin: 0 16px 10px;
+      border-radius: 16px; padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color .15s, transform .12s;
+    }
+    .route-card:active { transform: scale(.99); }
+    .route-card.hl { border-color: var(--p); }
+
+    .rc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .rc-mins { font-size: 32px; font-weight: 800; color: #1a1a2e; line-height: 1; }
+    .rc-unit { font-size: 12px; color: #888; }
+    .rc-name { font-size: 11px; color: #555; margin-top: 2px; }
+    .rc-sub  { font-size: 11px; color: #aaa; }
+    .rc-arrive { font-size: 12px; font-weight: 700; }
+
+    /* route step line */
+    .rc-steps { display: flex; align-items: center; gap: 3px; height: 14px; }
+    .rs-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .rs-line { flex: 1; height: 3px; border-radius: 2px; }
+    .rs-dash { flex: 1; border-top: 2.5px dashed #aaa; }
+
+    /* ══════════════════════════════════════════
+       ROUTE DETAIL
+    ══════════════════════════════════════════ */
+    .detail-head { background: #fff; padding: 6px 16px 16px; border-bottom: 1px solid #f0eaf8; }
+    .detail-topbar {
+      display: flex; align-items: center;
+      justify-content: space-between; padding-bottom: 10px;
+    }
+    .back-btn {
+      display: flex; align-items: center; gap: 3px;
+      color: var(--p); font-size: 15px; cursor: pointer; padding: 4px;
+    }
+    .detail-dur  { font-size: 24px; font-weight: 800; color: var(--p); }
+    .detail-eta  { font-size: 13px; color: #888; }
+
+    /* step list */
+    .steps { padding: 16px 16px 0; display: flex; flex-direction: column; }
+    .step  { display: flex; gap: 14px; }
+    .step-l {
+      display: flex; flex-direction: column;
+      align-items: center; width: 18px; flex-shrink: 0;
+    }
+    .s-circle {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2.5px solid var(--p); background: #fff;
+      flex-shrink: 0; z-index: 1;
+    }
+    .s-circle.filled { background: var(--p); }
+    .s-circle.dest   { border-color: var(--red); background: var(--red); width: 16px; height: 16px; }
+    .s-vline  { flex: 1; width: 2px; background: var(--p); min-height: 36px; }
+    .s-vdash  { flex: 1; width: 2px;
+      background: repeating-linear-gradient(to bottom, #aaa 0, #aaa 4px, transparent 4px, transparent 8px);
+      min-height: 36px;
+    }
+    .step-r  { flex: 1; padding-bottom: 20px; }
+    .s-name  { font-size: 15px; font-weight: 800; color: #1a1a2e; margin-bottom: 2px; }
+    .s-name.dest { color: var(--red); }
+    .s-time  { font-size: 12px; font-weight: 700; color: var(--p); }
+    .s-sub   { font-size: 12px; color: #777; margin-top: 2px; }
+    .metro-tag {
+      display: inline-block; margin-left: 6px;
+      background: var(--pb); color: var(--p);
+      border-radius: 6px; padding: 1px 8px; font-size: 10px; font-weight: 700;
+    }
+    .ride-box {
+      background: var(--pb); border-radius: 10px;
+      padding: 8px 11px; margin-top: 6px;
+      font-size: 11px; color: var(--p); font-weight: 700;
+    }
+
+    .alert-card {
+      background: #fff; margin: 0 16px 12px;
+      border-radius: 14px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .alert-main h4 { font-size: 13px; font-weight: 800; color: #1a1a2e; margin-bottom: 2px; }
+    .alert-main p  { font-size: 11px; color: #aaa; }
+
+    .detail-actions {
+      position: absolute; bottom: 80px; left: 0; right: 0;
+      background: #fff; padding: 12px 16px;
+      display: flex; gap: 8px;
+      border-top: 1px solid #f0eaf8;
+    }
+    .act-btn {
+      flex: 1; background: var(--pb); color: var(--p);
+      border: none; border-radius: 12px;
+      padding: 11px 6px; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    .nav-start {
+      flex: 1.6; background: var(--p); color: #fff;
+      border: none; border-radius: 12px;
+      padding: 11px 6px; font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+
+    /* ══════════════════════════════════════════
+       EXPLORE
+    ══════════════════════════════════════════ */
+    .exp-head { background: #fff; padding: 6px 16px 14px; }
+    .exp-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .exp-title  { font-size: 22px; font-weight: 900; color: #1a1a2e; }
+    .loc-pill   {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--pb); border-radius: 20px;
+      padding: 6px 13px; font-size: 12px; color: var(--p); font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cat-scroll { display: flex; gap: 8px; overflow-x: auto; }
+    .cat-scroll::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      flex-shrink: 0; background: var(--pb); color: var(--p);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      border: 2px solid transparent; transition: all .15s;
+    }
+    .cat-chip.on { background: var(--p); color: #fff; }
+
+    .exp-sec { padding: 14px 16px 0; }
+    .exp-sec-hdr {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px;
+    }
+    .exp-sec-hdr h3 { font-size: 15px; font-weight: 800; color: #1a1a2e; }
+    .more-link { font-size: 13px; color: var(--p); font-weight: 700; cursor: pointer; }
+
+    .food-list { display: flex; flex-direction: column; gap: 9px; }
+    .food-row {
+      background: #fff; border-radius: 14px; padding: 12px;
+      display: flex; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.05); cursor: pointer;
+    }
+    .food-img { width: 62px; height: 62px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+    .food-name { font-size: 14px; font-weight: 800; color: #1a1a2e; margin-bottom: 3px; }
+    .food-meta { font-size: 11px; color: #aaa; margin-bottom: 4px; }
+    .stars { font-size: 12px; }
+
+    .place-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+    .place-scroll::-webkit-scrollbar { display: none; }
+    .place-card { flex-shrink: 0; width: 130px; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); cursor: pointer; }
+    .place-img  { width: 100%; height: 82px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+    .place-name { font-size: 12px; font-weight: 700; color: #333; padding: 8px 9px 10px; }
+
+    /* ══════════════════════════════════════════
+       ITINERARY
+    ══════════════════════════════════════════ */
+    .itin-head {
+      background: #fff; padding: 6px 16px 14px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .itin-title { font-size: 22px; font-weight: 900; color: #1a1a2e; }
+    .add-circle {
+      width: 32px; height: 32px; background: var(--p);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 20px; cursor: pointer;
+    }
+
+    .date-tabs {
+      display: flex; background: var(--pb);
+      margin: 12px 16px; border-radius: 12px; padding: 4px;
+    }
+    .date-tab {
+      flex: 1; text-align: center; padding: 7px 4px;
+      font-size: 13px; font-weight: 700; color: #aaa;
+      border-radius: 8px; cursor: pointer; transition: all .15s;
+    }
+    .date-tab.on { background: #fff; color: var(--p); box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+
+    .timeline { padding: 4px 16px 16px; }
+    .tl-item { display: flex; gap: 12px; }
+    .tl-l { display: flex; flex-direction: column; align-items: center; width: 50px; flex-shrink: 0; padding-top: 2px; }
+    .tl-time { font-size: 12px; font-weight: 800; color: var(--p); white-space: nowrap; }
+    .tl-dot  { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--p); background: #fff; margin: 5px 0; }
+    .tl-dot.filled { background: var(--p); }
+    .tl-line { flex: 1; width: 2px; background: #e0d8f8; }
+    .tl-r {
+      flex: 1; background: #fff; border-radius: 14px;
+      padding: 12px 13px; margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.05); position: relative;
+    }
+    .tl-name { font-size: 14px; font-weight: 800; color: #1a1a2e; margin-bottom: 3px; }
+    .tl-sub  { font-size: 12px; color: #aaa; }
+    .tl-badge {
+      position: absolute; top: 12px; right: 12px;
+      border-radius: 8px; padding: 3px 9px;
+      font-size: 10px; font-weight: 800; color: #fff;
+    }
+    .tl-badge.warn  { background: var(--red); }
+    .tl-badge.ok    { background: var(--green); }
+
+    /* ══════════════════════════════════════════
+       AI ASSISTANT
+    ══════════════════════════════════════════ */
+    #ai { background: #f0ecfa; }
+    #ai .status-bar { color: #fff; }
+
+    .ai-head {
+      background: linear-gradient(135deg, #6a3fa0, #9b7ec8);
+      padding: 6px 16px 16px; flex-shrink: 0;
+    }
+    .ai-topbar { display: flex; align-items: center; gap: 10px; }
+    .ai-avatar {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.22); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .ai-head-text h3 { font-size: 16px; font-weight: 800; color: #fff; }
+    .ai-head-text p  { font-size: 12px; color: rgba(255,255,255,.8); }
+
+    .ai-msgs { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .ai-bubble {
+      background: #fff; border-radius: 16px 16px 16px 4px;
+      padding: 12px 14px; max-width: 82%;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .ai-bubble p { font-size: 13px; color: #333; line-height: 1.55; }
+
+    .status-section-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .status-rows { display: flex; flex-direction: column; gap: 7px; }
+    .status-row {
+      background: #fff; border-radius: 10px; padding: 9px 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .sr-left  { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #444; }
+    .sr-right { font-size: 12px; font-weight: 800; }
+    .ok    { color: var(--green); }
+    .delay { color: var(--orange); }
+    .warn  { color: var(--red); }
+
+    .suggest-box {
+      background: #e8f5e9; border-radius: 10px;
+      padding: 9px 12px; font-size: 12px; color: #2e7d32; font-weight: 700;
+    }
+
+    .qa-label { font-size: 12px; color: #888; padding: 0 16px 8px; }
+    .qa-btns  { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 12px; }
+    .qa-btn {
+      background: #fff; color: var(--p);
+      border: 1.5px solid var(--p); border-radius: 20px;
+      padding: 7px 15px; font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: all .15s;
+    }
+    .qa-btn:active { background: var(--p); color: #fff; }
+
+    .ai-input-bar {
+      position: absolute; bottom: 80px; left: 0; right: 0;
+      background: #fff; border-top: 1px solid #ede8f8;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .ai-input {
+      flex: 1; background: var(--pb); border: none;
+      border-radius: 22px; padding: 10px 16px;
+      font-size: 14px; color: #333; outline: none;
+    }
+    .ai-send {
+      width: 36px; height: 36px; background: var(--p);
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      color: #fff; font-size: 16px; cursor: pointer;
+    }
+
+    /* ══════════════════════════════════════════
+       PROFILE
+    ══════════════════════════════════════════ */
+    #profile .status-bar { color: #fff; }
+    .profile-hero {
+      background: linear-gradient(150deg, #6a3fa0 0%, #9b7ec8 100%);
+      padding: 12px 16px 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .profile-ava {
+      width: 66px; height: 66px;
+      background: rgba(255,255,255,.22); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px;
+    }
+    .profile-info { flex: 1; color: #fff; }
+    .profile-name { font-size: 19px; font-weight: 900; margin-bottom: 5px; }
+    .profile-tier {
+      background: rgba(255,255,255,.2); border-radius: 10px;
+      padding: 3px 10px; font-size: 11px; display: inline-block;
+    }
+    .edit-btn {
+      background: rgba(255,255,255,.18); color: #fff;
+      border: 1px solid rgba(255,255,255,.35); border-radius: 10px;
+      padding: 6px 13px; font-size: 12px; cursor: pointer;
+    }
+
+    .pref-sec { padding: 14px 16px 0; }
+    .pref-sec-label { font-size: 12px; font-weight: 800; color: #aaa; margin-bottom: 9px; }
+    .pref-list { background: #fff; border-radius: 16px; overflow: hidden; }
+    .pref-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 13px 16px; border-bottom: 1px solid #f5f0fc; cursor: pointer;
+    }
+    .pref-row:last-child { border-bottom: none; }
+    .pref-key { font-size: 14px; color: #333; }
+    .pref-val { font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 4px; }
+    .arr { color: #ccc; font-size: 15px; }
+  </style>
+</head>
+<body>
+
+<div class="page-title">🐾 路伴 LooPan — Interactive Prototype</div>
+
+<div class="phone" id="app">
+
+  <!-- ═══════════ HOME ═══════════ -->
+  <div class="screen active" id="home">
+    <div class="home-hero">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="status-icons">▪▪▪ WiFi 🔋</div>
+      </div>
+      <div class="home-topbar">
+        <div class="home-logo">
+          <div class="logo-bubble">🐾</div>
+          路伴 LooPan
+        </div>
+        <span class="bell">🔔</span>
+      </div>
+      <div class="home-greeting">
+        <h2>早安！👋</h2>
+        <p>今天適合提早 8 分鐘出門喔！</p>
+      </div>
+      <div class="weather-row">
+        <div class="w-chip">☁️ 25°C 多雲時晴</div>
+        <div class="w-chip">🚇 捷運正常</div>
+        <div class="w-chip">😊 空氣良好</div>
+      </div>
+      <div class="trip-banner">
+        <div>
+          <div class="trip-badge">今日第一個行程</div>
+          <div class="trip-name">🔴 09:00 產品會議</div>
+          <div class="trip-hint">建議 08:12 出門</div>
+        </div>
+        <button class="view-btn" onclick="goTo('route','home')">查看路線 ›</button>
+      </div>
+    </div>
+
+    <div class="screen-body">
+      <div class="search-wrap">
+        <div class="search-box" onclick="goTo('route','home')">
+          <span style="font-size:18px;">🔍</span>
+          <span class="search-placeholder">你想去哪裡？輸入目的地、場所或需求</span>
+        </div>
+      </div>
+
+      <div class="quick-grid">
+        <div class="q-item"><div class="q-icon" style="background:#ede8ff;">💼</div><span class="q-label">上班通勤</span></div>
+        <div class="q-item"><div class="q-icon" style="background:#ffe8e8;">🏠</div><span class="q-label">回家</span></div>
+        <div class="q-item"><div class="q-icon" style="background:#fff3e0;">🍜</div><span class="q-label">找美食</span></div>
+        <div class="q-item"><div class="q-icon" style="background:#e8f5e9;">👨‍👩‍👧</div><span class="q-label">親子出遊</span></div>
+        <div class="q-item"><div class="q-icon" style="background:#e8eaf6;">🌙</div><span class="q-label">夜間安全</span></div>
+        <div class="q-item"><div class="q-icon" style="background:#e0f7fa;">🏝️</div><span class="q-label">週末旅遊</span></div>
+        <div class="q-item" onclick="goTo('explore','home')"><div class="q-icon" style="background:#fce4ec;">📍</div><span class="q-label">景點探索</span></div>
+        <div class="q-item" onclick="goTo('ai','home')"><div class="q-icon" style="background:#f3e5f5;">🤖</div><span class="q-label">AI 助手</span></div>
+      </div>
+
+      <div class="section-header"><h3>猜你會需要</h3></div>
+      <div class="rec-scroll">
+        <div class="rec-card">
+          <div class="rec-img" style="background:#fff3e0;">🍱</div>
+          <div class="rec-info">
+            <div class="rec-title">公司附近午餐</div>
+            <div class="rec-sub" style="color:#f9a825;">人氣 4.5 以上</div>
+          </div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-img" style="background:#e8eaf6;">🌃</div>
+          <div class="rec-info">
+            <div class="rec-title">下班安全路線</div>
+            <div class="rec-sub">照明充足・人潮多</div>
+          </div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-img" style="background:#e0f7fa;">🎡</div>
+          <div class="rec-info">
+            <div class="rec-title">週末親子景點</div>
+            <div class="rec-sub">適合全家同遊</div>
+          </div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-img" style="background:#fce4ec;">🛍️</div>
+          <div class="rec-info">
+            <div class="rec-title">熱門購物商圈</div>
+            <div class="rec-sub">週末限定優惠</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI FAB -->
+    <div class="ai-fab" onclick="goTo('ai','home')">
+      <span style="font-size:22px;">🤖</span>
+      <span>AI搭車<br>助班</span>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item on" onclick="goTo('home')">
+        <span class="nav-icon">🏠</span><span class="nav-label">首頁</span>
+      </div>
+      <div class="nav-item" onclick="goTo('route','home')">
+        <span class="nav-icon">🗺️</span><span class="nav-label">路線</span>
+      </div>
+      <div class="nav-item" onclick="goTo('explore','home')">
+        <span class="nav-icon">🔍</span><span class="nav-label">探索</span>
+      </div>
+      <div class="nav-item" onclick="goTo('itinerary','home')">
+        <span class="nav-icon">📅</span><span class="nav-label">行程</span>
+      </div>
+      <div class="nav-item" onclick="goTo('profile','home')">
+        <span class="nav-icon">👤</span><span class="nav-label">我的</span>
+      </div>
+    </div>
+  </div><!-- /home -->
+
+
+  <!-- ═══════════ ROUTE PLANNING ═══════════ -->
+  <div class="screen" id="route">
+    <div class="status-bar" style="background:#fff; color:#1a1a2e;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="route-head">
+      <div class="mode-tabs">
+        <div class="mode-tab on"><span class="mi">🚌</span><span>公車</span></div>
+        <div class="mode-tab"><span class="mi">🚇</span><span>捷運</span></div>
+        <div class="mode-tab"><span class="mi">🚲</span><span>YouBike</span></div>
+        <div class="mode-tab"><span class="mi">🚶</span><span>步行</span></div>
+        <div class="mode-tab"><span class="mi">🚗</span><span>開車</span></div>
+      </div>
+
+      <div class="loc-inputs">
+        <div class="loc-row"><div class="dot o"></div><span class="loc-text">我的位置</span></div>
+        <div class="loc-row"><div class="dot d"></div><span class="loc-text">台北車站</span></div>
+        <div class="swap">⇅</div>
+      </div>
+
+      <div class="route-ctrls">
+        <div class="depart-pill">📅 立即出發 ▾</div>
+        <button class="search-btn">搜尋路線</button>
+      </div>
+    </div>
+
+    <div class="screen-body">
+      <div class="routes-label">推薦路線</div>
+
+      <!-- Route 1 fastest -->
+      <div class="route-card hl" onclick="goTo('detail','route')">
+        <div class="rc-top">
+          <div>
+            <span class="chip fastest" style="margin-bottom:6px;">最快</span>
+            <div style="display:flex;align-items:baseline;gap:2px;">
+              <span class="rc-mins">28</span><span class="rc-unit">分鐘</span>
+            </div>
+            <div class="rc-name">捷運 + 步行</div>
+            <div class="rc-sub">轉乘 1次・步行 450m</div>
+          </div>
+          <div class="rc-arrive" style="color:var(--p);">預計 09:25 抵達</div>
+        </div>
+        <div class="rc-steps">
+          <div class="rs-dot" style="background:var(--p);"></div>
+          <div class="rs-line" style="background:var(--p);"></div>
+          <div class="rs-dot" style="background:var(--p);"></div>
+          <div class="rs-dash"></div>
+          <div class="rs-dot" style="background:#aaa;"></div>
+          <div class="rs-dash"></div>
+          <div class="rs-dot" style="background:var(--red);"></div>
+        </div>
+      </div>
+
+      <!-- Route 2 least walk -->
+      <div class="route-card" onclick="goTo('detail','route')">
+        <div class="rc-top">
+          <div>
+            <span class="chip leastwalk" style="margin-bottom:6px;">最少走路</span>
+            <div style="display:flex;align-items:baseline;gap:2px;">
+              <span class="rc-mins">35</span><span class="rc-unit">分鐘</span>
+            </div>
+            <div class="rc-name">公車 + 捷運</div>
+            <div class="rc-sub">步行 180m・適合親子</div>
+          </div>
+          <div class="rc-arrive" style="color:var(--blue);">預計 09:32 抵達</div>
+        </div>
+        <div class="rc-steps">
+          <div class="rs-dot" style="background:var(--orange);"></div>
+          <div class="rs-line" style="background:var(--orange);"></div>
+          <div class="rs-dot" style="background:var(--p);"></div>
+          <div class="rs-line" style="background:var(--p);"></div>
+          <div class="rs-dot" style="background:var(--red);"></div>
+        </div>
+      </div>
+
+      <!-- Route 3 cheapest -->
+      <div class="route-card" onclick="goTo('detail','route')">
+        <div class="rc-top">
+          <div>
+            <span class="chip cheapest" style="margin-bottom:6px;">最省錢</span>
+            <div style="display:flex;align-items:baseline;gap:2px;">
+              <span class="rc-mins" style="color:var(--orange);">42</span><span class="rc-unit">分鐘</span>
+            </div>
+            <div class="rc-name">公車 + YouBike</div>
+            <div class="rc-sub">花費最低・經過景點</div>
+          </div>
+          <div class="rc-arrive" style="color:var(--orange);">預計 09:39 抵達</div>
+        </div>
+        <div class="rc-steps">
+          <div class="rs-dot" style="background:var(--orange);"></div>
+          <div class="rs-line" style="background:var(--orange);"></div>
+          <div class="rs-dot" style="background:#4caf50;"></div>
+          <div class="rs-line" style="background:#4caf50;"></div>
+          <div class="rs-dot" style="background:var(--red);"></div>
+        </div>
+      </div>
+
+      <!-- Route 4 safe -->
+      <div class="route-card" onclick="goTo('detail','route')">
+        <div class="rc-top">
+          <div>
+            <span class="chip safe" style="margin-bottom:6px;">夜間安全</span>
+            <div style="display:flex;align-items:baseline;gap:2px;">
+              <span class="rc-mins">32</span><span class="rc-unit">分鐘</span>
+            </div>
+            <div class="rc-name">捷運 + 步行</div>
+            <div class="rc-sub">照明充足・人潮較多</div>
+          </div>
+          <div class="rc-arrive" style="color:#7b1fa2;">預計 09:29 抵達</div>
+        </div>
+        <div class="rc-steps">
+          <div class="rs-dot" style="background:var(--p);"></div>
+          <div class="rs-line" style="background:var(--p);"></div>
+          <div class="rs-dot" style="background:var(--p);"></div>
+          <div class="rs-line" style="background:var(--p);"></div>
+          <div class="rs-dot" style="background:var(--red);"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goBack()"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','route')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','route')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','route')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /route -->
+
+
+  <!-- ═══════════ ROUTE DETAIL ═══════════ -->
+  <div class="screen" id="detail">
+    <div class="status-bar" style="background:#fff; color:#1a1a2e;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="detail-head">
+      <div class="detail-topbar">
+        <div class="back-btn" onclick="goBack()">‹ 捷運 + 步行</div>
+        <span class="detail-dur">28分鐘</span>
+      </div>
+      <div class="detail-eta">⏱ 09:25 預計抵達</div>
+    </div>
+
+    <!-- scrollable content with padding for the action bar -->
+    <div class="screen-body" style="padding-bottom: 150px;">
+      <div class="steps">
+
+        <!-- origin -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle filled"></div>
+            <div class="s-vdash"></div>
+          </div>
+          <div class="step-r">
+            <div style="display:flex; justify-content:space-between;">
+              <div class="s-name">我的位置</div>
+              <div class="s-time">09:05 出發</div>
+            </div>
+            <div class="s-sub">步行 4 分鐘（300m）↓</div>
+          </div>
+        </div>
+
+        <!-- metro boarding -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle filled"></div>
+            <div class="s-vline"></div>
+          </div>
+          <div class="step-r">
+            <div>
+              <span class="s-name" style="display:inline;">忠孝復興站</span>
+              <span class="metro-tag">板南線</span>
+            </div>
+            <div class="s-sub">往南港展覽館方向</div>
+            <div class="s-sub">09:09 進站・4 號月台</div>
+            <div class="ride-box">🚇 搭乘 3 站（8 分鐘）</div>
+          </div>
+        </div>
+
+        <!-- metro exit -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle filled"></div>
+            <div class="s-vdash"></div>
+          </div>
+          <div class="step-r">
+            <div style="display:flex; justify-content:space-between;">
+              <div class="s-name">台北車站（捷運）</div>
+              <div class="s-time">09:17 下車</div>
+            </div>
+            <div class="s-sub">2 號出口</div>
+            <div class="s-sub" style="margin-top:4px;">步行 8 分鐘（450m）↓</div>
+          </div>
+        </div>
+
+        <!-- destination -->
+        <div class="step">
+          <div class="step-l">
+            <div class="s-circle dest"></div>
+          </div>
+          <div class="step-r" style="padding-bottom:8px;">
+            <div style="display:flex; justify-content:space-between;">
+              <div class="s-name dest">台北車站</div>
+              <div style="font-size:12px; font-weight:800; color:var(--red);">09:25 抵達 ✓</div>
+            </div>
+            <div class="s-sub">目的地</div>
+          </div>
+        </div>
+
+      </div><!-- /steps -->
+
+      <div class="alert-card">
+        <span style="font-size:22px;">🔔</span>
+        <div class="alert-main">
+          <h4>到站提醒已開啟</h4>
+          <p>即將在 台北車站 下車時提醒</p>
+        </div>
+        <span class="arr" style="margin-left:auto;">›</span>
+      </div>
+    </div><!-- /screen-body -->
+
+    <div class="detail-actions">
+      <button class="act-btn">📤 分享</button>
+      <button class="act-btn">⭐ 常用</button>
+      <button class="nav-start">開始導航 ›</button>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item on"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','detail')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','detail')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','detail')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /detail -->
+
+
+  <!-- ═══════════ EXPLORE ═══════════ -->
+  <div class="screen" id="explore">
+    <div class="status-bar" style="background:#fff; color:#1a1a2e;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="exp-head">
+      <div class="exp-topbar">
+        <div class="exp-title">探索</div>
+        <span style="font-size:22px; cursor:pointer;">🔍</span>
+      </div>
+      <div class="loc-pill">📍 附近・台北車站</div>
+      <div class="cat-scroll">
+        <div class="cat-chip on">美食</div>
+        <div class="cat-chip">景點</div>
+        <div class="cat-chip">活動</div>
+        <div class="cat-chip">旅遊</div>
+        <div class="cat-chip">天氣</div>
+      </div>
+    </div>
+
+    <div class="screen-body">
+      <div class="exp-sec">
+        <div class="exp-sec-hdr">
+          <h3>🍜 Yahoo! 推薦美食</h3>
+          <span class="more-link">更多 ›</span>
+        </div>
+        <div class="food-list">
+          <div class="food-row">
+            <div class="food-img" style="background:#fff3e0;">🍢</div>
+            <div>
+              <div class="food-name">串燒附近人氣美食</div>
+              <div class="food-meta">步行 5 分鐘</div>
+              <div class="stars">⭐⭐⭐⭐⭐ <strong>4.6</strong></div>
+            </div>
+          </div>
+          <div class="food-row">
+            <div class="food-img" style="background:#fff8e1;">🧋</div>
+            <div>
+              <div class="food-name">老爹地雞排</div>
+              <div class="food-meta">步行 8 分鐘</div>
+              <div class="stars">⭐⭐⭐⭐ <strong>4.4</strong></div>
+            </div>
+          </div>
+          <div class="food-row">
+            <div class="food-img" style="background:#e8f5e9;">🍱</div>
+            <div>
+              <div class="food-name">親子友善餐廳</div>
+              <div class="food-meta">步行 10 分鐘</div>
+              <div class="stars">⭐⭐⭐⭐⭐ <strong>4.7</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-sec" style="padding-top:18px; padding-bottom:16px;">
+        <div class="exp-sec-hdr">
+          <h3>🏛️ 熱門景點</h3>
+          <span class="more-link">更多 ›</span>
+        </div>
+        <div class="place-scroll">
+          <div class="place-card"><div class="place-img" style="background:#e8eaf6;">🌿</div><div class="place-name">草山文教園區</div></div>
+          <div class="place-card"><div class="place-img" style="background:#e3f2fd;">🏛️</div><div class="place-name">中正紀念堂</div></div>
+          <div class="place-card"><div class="place-img" style="background:#fce4ec;">🎪</div><div class="place-name">大稻埕碼頭</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','explore')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item on"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','explore')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','explore')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /explore -->
+
+
+  <!-- ═══════════ ITINERARY ═══════════ -->
+  <div class="screen" id="itinerary">
+    <div class="status-bar" style="background:#fff; color:#1a1a2e;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="itin-head">
+      <div class="itin-title">我的行程</div>
+      <div class="add-circle">+</div>
+    </div>
+
+    <div class="screen-body">
+      <div class="date-tabs">
+        <div class="date-tab on">今天</div>
+        <div class="date-tab">明天</div>
+        <div class="date-tab">本週</div>
+        <div class="date-tab">已完成</div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-l">
+            <div class="tl-time">09:00</div>
+            <div class="tl-dot filled"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-r">
+            <div class="tl-name">🔴 產品會議</div>
+            <div class="tl-sub">建議 08:12 出門・捷運最快 28 分鐘</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-l">
+            <div class="tl-time">14:30</div>
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-r">
+            <div class="tl-name">🚄 高鐵還彼</div>
+            <div class="tl-sub">建議 13:45 出門・高鐵 45 分鐘</div>
+            <span class="tl-badge warn">尚未訂票</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-l">
+            <div class="tl-time">17:00</div>
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-r">
+            <div class="tl-name">🎁 購買伴手禮</div>
+            <div class="tl-sub">車站附近推薦 3 選</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-l">
+            <div class="tl-time">20:00</div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-r">
+            <div class="tl-name">🍽️ 與家人聚餐</div>
+            <div class="tl-sub">餐廳已預訂・步行 6 分鐘</div>
+            <span class="tl-badge ok">已訂位</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','itinerary')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','itinerary')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item on"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','itinerary')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /itinerary -->
+
+
+  <!-- ═══════════ AI ASSISTANT ═══════════ -->
+  <div class="screen" id="ai">
+    <div class="status-bar" style="background:linear-gradient(135deg,#6a3fa0,#9b7ec8); color:#fff;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="ai-head">
+      <div class="ai-topbar">
+        <div class="back-btn" onclick="goBack()" style="color:#fff; font-size:20px;">‹</div>
+        <div class="ai-avatar">🤖</div>
+        <div class="ai-head-text">
+          <h3>路伴小助手</h3>
+          <p>即時陪伴・主動提醒與建議</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-body" style="padding-bottom:140px; background:#f0ecfa;">
+      <div class="ai-msgs">
+        <div class="ai-bubble">
+          <p>嗨！我是路伴小助手 👋<br>我會幫你掌握<br>交通・天氣與行程狀況！</p>
+        </div>
+
+        <div class="status-section-label">目前行程狀況</div>
+        <div class="status-rows">
+          <div class="status-row">
+            <div class="sr-left"><span>🚇</span><span>捷運板南線</span></div>
+            <div class="sr-right ok">正常行駛</div>
+          </div>
+          <div class="status-row">
+            <div class="sr-left"><span>🚌</span><span>公車 265</span></div>
+            <div class="sr-right delay">誤點 6 分鐘</div>
+          </div>
+          <div class="status-row">
+            <div class="sr-left"><span>🌧️</span><span>目的地附近下雨機率</span></div>
+            <div class="sr-right warn">40%</div>
+          </div>
+        </div>
+
+        <div class="suggest-box">☂️ 建議今日攜帶雨具 🌂</div>
+      </div>
+
+      <div class="qa-label">需要我幫你做什麼嗎？</div>
+      <div class="qa-btns">
+        <div class="qa-btn" onclick="goTo('route','ai')">查看回家路線</div>
+        <div class="qa-btn" onclick="goTo('explore','ai')">附近美食推薦</div>
+        <div class="qa-btn">天氣資訊</div>
+        <div class="qa-btn">其他問題</div>
+      </div>
+    </div>
+
+    <div class="ai-input-bar">
+      <input class="ai-input" placeholder="輸入訊息..." />
+      <div class="ai-send">➤</div>
+      <span style="font-size:22px; cursor:pointer; color:#bbb;">🎤</span>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','ai')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','ai')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','ai')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item" onclick="goTo('profile','ai')"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /ai -->
+
+
+  <!-- ═══════════ PROFILE ═══════════ -->
+  <div class="screen" id="profile">
+    <div class="status-bar" style="background:linear-gradient(135deg,#6a3fa0,#9b7ec8); color:#fff;">
+      <span class="time">9:41</span>
+      <div class="status-icons">▪▪▪ WiFi 🔋</div>
+    </div>
+
+    <div class="profile-hero">
+      <div class="profile-ava">🐶</div>
+      <div class="profile-info">
+        <div class="profile-name">小路伴</div>
+        <div class="profile-tier">一般會員</div>
+      </div>
+      <button class="edit-btn">編輯資料</button>
+    </div>
+
+    <div class="screen-body">
+      <div class="pref-sec">
+        <div class="pref-sec-label">我的偏好</div>
+        <div class="pref-list">
+          <div class="pref-row"><span class="pref-key">🚶 步行速度</span><span class="pref-val">普通 <span class="arr">›</span></span></div>
+          <div class="pref-row"><span class="pref-key">🚇 偏好交通方式</span><span class="pref-val">捷運・公車 <span class="arr">›</span></span></div>
+          <div class="pref-row"><span class="pref-key">🕐 出門模式</span><span class="pref-val">通勤模式 <span class="arr">›</span></span></div>
+          <div class="pref-row"><span class="pref-key">📍 常用地點</span><span class="pref-val">家・公司・學校 <span class="arr">›</span></span></div>
+          <div class="pref-row"><span class="pref-key">🔔 通知設定</span><span class="pref-val">行程・天氣 <span class="arr">›</span></span></div>
+          <div class="pref-row"><span class="pref-key">🛡️ 安全設定</span><span class="pref-val">夜間安全・到家提醒 <span class="arr">›</span></span></div>
+        </div>
+      </div>
+
+      <div class="pref-sec" style="padding-top:16px; padding-bottom:16px;">
+        <div class="pref-sec-label">更多服務</div>
+        <div class="pref-list">
+          <div class="pref-row"><span class="pref-key">🎫 票務 / 訂票紀錄</span><span class="arr">›</span></div>
+          <div class="pref-row"><span class="pref-key">🗂️ 收藏清單</span><span class="arr">›</span></div>
+          <div class="pref-row"><span class="pref-key">💬 客服中心</span><span class="arr">›</span></div>
+          <div class="pref-row"><span class="pref-key">⚙️ 設定</span><span class="arr">›</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goTo('home')"><span class="nav-icon">🏠</span><span class="nav-label">首頁</span></div>
+      <div class="nav-item" onclick="goTo('route','profile')"><span class="nav-icon">🗺️</span><span class="nav-label">路線</span></div>
+      <div class="nav-item" onclick="goTo('explore','profile')"><span class="nav-icon">🔍</span><span class="nav-label">探索</span></div>
+      <div class="nav-item" onclick="goTo('itinerary','profile')"><span class="nav-icon">📅</span><span class="nav-label">行程</span></div>
+      <div class="nav-item on"><span class="nav-icon">👤</span><span class="nav-label">我的</span></div>
+    </div>
+  </div><!-- /profile -->
+
+</div><!-- /phone -->
+
+<script>
+  const ORDER = ['home','route','detail','explore','itinerary','ai','profile'];
+  let current = 'home';
+  const stack = ['home'];
+
+  function goTo(id, from) {
+    if (id === current) return;
+    const cur = document.getElementById(current);
+    const nxt = document.getElementById(id);
+    if (!nxt) return;
+
+    const ci = ORDER.indexOf(current);
+    const ni = ORDER.indexOf(id);
+    const forward = ni > ci || id === 'detail';
+
+    nxt.style.transition = 'none';
+    nxt.style.transform = forward ? 'translateX(100%)' : 'translateX(-28%)';
+    nxt.classList.remove('active','slide-left');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        nxt.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+        cur.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+        nxt.style.transform = 'translateX(0)';
+        cur.style.transform = forward ? 'translateX(-28%)' : 'translateX(100%)';
+
+        setTimeout(() => {
+          cur.style.transform = 'translateX(100%)';
+          cur.style.transition = '';
+          nxt.style.transition = '';
+        }, 340);
+      });
+    });
+
+    stack.push(id);
+    current = id;
+  }
+
+  function goBack() {
+    if (stack.length <= 1) return;
+    stack.pop();
+    const prev = stack[stack.length - 1];
+    const cur  = document.getElementById(current);
+    const nxt  = document.getElementById(prev);
+    if (!nxt) return;
+
+    nxt.style.transition = 'none';
+    nxt.style.transform = 'translateX(-28%)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        nxt.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+        cur.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+        nxt.style.transform = 'translateX(0)';
+        cur.style.transform = 'translateX(100%)';
+
+        setTimeout(() => {
+          cur.style.transform = 'translateX(100%)';
+          cur.style.transition = '';
+          nxt.style.transition = '';
+        }, 340);
+      });
+    });
+
+    current = prev;
+  }
+</script>
+</body>
+</html>
